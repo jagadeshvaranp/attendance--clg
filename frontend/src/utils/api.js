@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+const localApiUrl = 'http://localhost:5000/api';
+const deployedApiUrl = 'https://attendance-clg-backend.vercel.app/api';
+const apiBaseUrl = import.meta.env.VITE_API_URL ||
+  (typeof window !== 'undefined' && window.location.hostname.includes('localhost') ? localApiUrl : deployedApiUrl);
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: apiBaseUrl,
   timeout: 30000,
 });
 

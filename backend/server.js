@@ -40,6 +40,14 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Attendance API is running!', version: '1.0.0' });
 });
 
+// Handle OPTIONS preflight requests
+app.options('*', cors({
+  origin: ['https://attendance-clg.vercel.app', 'http://localhost:5173', 'http://localhost:3000', process.env.FRONTEND_URL].filter(Boolean),
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });

@@ -35,6 +35,14 @@ app.use('/api/leaves', require('./routes/leaves'));
 app.use('/api/tasks', require('./routes/tasks'));
 app.use('/api/reports', require('./routes/reports'));
 
+// Support legacy routes without /api prefix
+app.use('/auth', require('./routes/auth'));
+app.use('/attendance', require('./routes/attendance'));
+app.use('/employees', require('./routes/employees'));
+app.use('/leaves', require('./routes/leaves'));
+app.use('/tasks', require('./routes/tasks'));
+app.use('/reports', require('./routes/reports'));
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Attendance API is running!', version: '1.0.0' });
